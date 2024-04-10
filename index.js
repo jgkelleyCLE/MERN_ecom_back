@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import authRoutes from './routes/authRoutes.js'
 
 const app = express()
 
@@ -25,6 +26,7 @@ connectionObj.once('connected', ()=> {
 })
 
 //ROUTING
+app.use('/api/auth', authRoutes)
 
 app.listen(port, ()=> {
     console.log(`Server is running on port ${port}`)
