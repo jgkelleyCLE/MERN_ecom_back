@@ -9,8 +9,19 @@ export const sendMail = async(req, res) => {
     console.log("TAX PRICE", cartList.taxPrice)
     console.log("TOTAL", cartList.total)
 
+    console.log("EMAIL", cartList.email)
+    console.log("DATE", cartList.selected)
+
 
     console.log("CART LIST", cartList)
+
+    let date = new Date(cartList.selected); // assuming cartList.selected is a date
+
+    let day = String(date.getDate()).padStart(2, '0');
+    let month = String(date.getMonth() + 1).padStart(2, '0'); // January is 0!
+    let year = date.getFullYear();
+
+    let formattedDate = month + '/' + day + '/' + year;
 
 
   let transporter = nodemailer.createTransport({
@@ -64,6 +75,9 @@ export const sendMail = async(req, res) => {
       <img style="width: 100px; height: 100px;" src="https://partysafariohio.com/wp-content/uploads/2018/06/Party-Safari-LogoColor.png" alt="partySafariLogo" />
       </div>
         <h1>Your Quote</h1>
+        <h3>Thank you for your interest in Party Safari! Below is your quote:</h3>
+        <h4>Event Date: ${formattedDate}</h4>
+        <h4>Email: ${cartList.email}</h4>
         <table class="my-table">
           <tr>
             <th>Image</th>
@@ -96,7 +110,7 @@ export const sendMail = async(req, res) => {
           <h3 style="font: bold">Total: ${cartList.total.toFixed(2)}</h3>
             </div>
         
-        <p>Thank you for your interest!</p>
+        
       </body>
     </html>
   `,
