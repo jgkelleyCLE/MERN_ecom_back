@@ -14,7 +14,7 @@ export const sendMail = async(req, res) => {
     service: 'gmail',
     auth: {
       user: 'partysafariohio@gmail.com',
-      pass: 'anyr mgnk grow xjnt'
+      pass: process.env.GMAIL_PASSWORD
     }
   });
 
@@ -22,26 +22,6 @@ export const sendMail = async(req, res) => {
     from: 'partysafariohio@gmail.com',
     to: 'john.gerard.kelley@gmail.com',
     subject: 'Party Safari Quote',
-
-    // html: `
-    // <h1>Your Quote</h1>
-    // <table style="width:100%; border: 1px solid black; borderRadius: 5px">
-    //   <tr>
-    //   <th>Image</th>
-    //     <th>Item</th>
-    //     <th>Quantity</th>
-    //     <th>Price</th>
-    //   </tr>
-    //   ${cartList.map(item => `
-    //     <tr>
-    //       <td><img style="width:50px; height:50px; borderRadius:5px;" src={${item.image}} /></td>
-    //       <td>${item.product}</td>
-    //       <td>${item.cartQuantity}</td>
-    //       <td>$${item.price}</td>
-    //     </tr>
-    //   `).join('')}
-    // </table>
-    // `
     html: `
     <html>
       <head>
