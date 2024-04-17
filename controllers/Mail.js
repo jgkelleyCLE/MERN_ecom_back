@@ -4,11 +4,14 @@ export const sendMail = async(req, res) => {
 
     const cartList = req.body.cartList;
 
+    console.log("SUBTOTAL", cartList.subtotal)
+    console.log("DELIVERY FEE", cartList.deliveryFee)
+    console.log("TAX PRICE", cartList.taxPrice)
+    console.log("TOTAL", cartList.total)
+
+
     console.log("CART LIST", cartList)
 
-    const cartListString = cartList.map(item => 
-        `Item: ${item.product}<br />\nQuantity: ${item.cartQuantity}\n <br /> Price: $${item.price}\n\n`
-      ).join('');
 
   let transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -19,74 +22,80 @@ export const sendMail = async(req, res) => {
   });
 
   let mailOptions = {
-    from: 'partysafariohio@gmail.com',
+    from: 'Party Safari <partysafariohio@gmail.com>',
     to: 'john.gerard.kelley@gmail.com',
     subject: 'Party Safari Quote',
     html: `
     <html>
       <head>
-      <style>
-          .container {
-            width: 95%;
-            border: 2px solid black;
-            border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
+        <style>
+          .my-table {
+            width: 100%;
+            border: 1px solid black;
           }
-          .card {
-            width: 90%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 2px 2px 2px 2px rgba(20,20,20,0.4);
-            margin-top: 5px;
-            margin-bottom: 5px;
-          }
-          .flex-col-container-start {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-          }
-          .flex-container-end {
-            display: flex;
-            flex-direction: column;
-            align-items: end;
+          .my-table th {
+            text-align: left;
+            background-color: #ff8c1a;
           }
           .product-image {
-            width: 75px;
+            width: 50px;
             height: 50px;
-            object-fit: contain;
             border-radius: 5px;
           }
+          .flex-col-container-start {
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+          }
+          .flex-container-end {
+                display: flex;
+                flex-direction: column;
+                align-items: end;
+            }
+            .flex-container-center {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
         </style>
-        
       </head>
       <body>
-
-        
-        <div class="container">
-        <h1 class="">Your Quote</h1>
-          
-          ${cartList.map(item => `
-            <div class="card">
-                <div class="flex-col-container-start">
-                    <img class="product-image" src="${item.image}" />
-                    <h3>${item.product}</h3>
-                </div>
-
-                <div class="flex-container-end">
-                    <p>Qty: ${item.cartQuantity}</p>
-                    <p>$${item.price.toFixed(2)}</p>
-                </div>
-              
-              
-            </div>
+      <div class="flex-container-center">
+      <img style="width: 100px; height: 100px;" src="https://partysafariohio.com/wp-content/uploads/2018/06/Party-Safari-LogoColor.png" alt="partySafariLogo" />
+      </div>
+        <h1>Your Quote</h1>
+        <table class="my-table">
+          <tr>
+            <th>Image</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Item Price</th>
+          </tr>
+          ${cartList.cart.map(item => `
+            <tr>
+            <td><img class="product-image" src="${item.image}" /></td>
+              <td>${item.product}</td>
+              <td>${item.cartQuantity}</td>
+              <td>$${item.price.toFixed(2)}</td>
+              <td>$${(item.price * item.cartQuantity).toFixed(2)}</td>
+            </tr>
+           
           `).join('')}
-        </div>
+
+         
+          
+            
+          
+        </table>
+            <div class="flex-container-end">
+          
+          <p>Subtotal: ${cartList.subtotal.toFixed(2)}</p>
+          <p>Tax: ${cartList.taxPrice.toFixed(2)}</p>
+          <p>Delivery Fee: ${cartList.deliveryFee.toFixed(2)}</p>
+          <h3 style="font: bold">Total: ${cartList.total.toFixed(2)}</h3>
+            </div>
+        
         <p>Thank you for your interest!</p>
       </body>
     </html>
@@ -100,43 +109,83 @@ export const sendMail = async(req, res) => {
 }
 
 
-{/* <html>
-      <head>
-        <style>
-          .my-table {
-            width: 100%;
-            border: 1px solid black;
-          }
-          .my-table th {
-            text-align: left;
-          }
-          .product-image {
-            width: 50px;
-            height: 50px;
-            border-radius: 5px;
-          }
-        </style>
-      </head>
-      <body>
-        <h1>Your Quote</h1>
-        <table class="my-table">
-          <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Image</th>
-          </tr>
-          ${cartList.map(item => `
-            <tr>
-              <td>${item.product}</td>
-              <td>${item.cartQuantity}</td>
-              <td>$${item.price.toFixed(2)}</td>
-              <td><img class="product-image" src="${item.image}" /></td>
-            </tr>
-          `).join('')}
-        </table>
-        <p>Thank you for your interest!</p>
-      </body>
-    </html> */}
+
 
     
+
+    // <html>
+    //   <head>
+    //   <style>
+    //       .container {
+    //         width: 95%;
+    //         border: 2px solid black;
+    //         border-radius: 5px;
+    //         display: flex;
+    //         flex-direction: column;
+    //         align-items: center;
+    //         padding: 10px;
+    //       }
+    //       .card {
+    //         width: 90%;
+    //         display: flex;
+    //         align-items: center;
+    //         justify-content: space-between;
+    //         padding: 10px;
+    //         border-radius: 5px;
+    //         box-shadow: 2px 2px 2px 2px rgba(20,20,20,0.4);
+    //         margin-top: 5px;
+    //         margin-bottom: 5px;
+    //       }
+    //       .flex-col-container-start {
+    //         display: flex;
+    //         flex-direction: column;
+    //         align-items: start;
+    //       }
+    //       .flex-container-end {
+    //         display: flex;
+    //         flex-direction: column;
+    //         align-items: end;
+    //       }
+    //       .product-image {
+    //         width: 75px;
+    //         height: 50px;
+    //         object-fit: contain;
+    //         border-radius: 5px;
+    //       }
+    //     </style>
+        
+    //   </head>
+    //   <body>
+
+        
+    //     <div class="container">
+    //     <h1 class="">Your Quote</h1>
+          
+    //       ${cartList.cart.map(item => `
+    //         <div class="card">
+    //             <div class="flex-col-container-start">
+    //                 <img class="product-image" src="${item.image}" />
+    //                 <h3>${item.product}</h3>
+    //             </div>
+
+    //             <div class="flex-container-end">
+    //                 <p>Qty: ${item.cartQuantity}</p>
+    //                 <p>$${item.price.toFixed(2)}</p>
+    //             </div>
+              
+              
+    //         </div>
+    //       `).join('')}
+
+    //       <div class="flex-container-end">
+          
+    //       <p>Subtotal: ${cartList.subtotal.toFixed(2)}</p>
+    //       <p>Tax: ${cartList.taxPrice.toFixed(2)}</p>
+    //     <p>Delivery Fee: ${cartList.deliveryFee.toFixed(2)}</p>
+    //     <h3 style="font: bold">Total: ${cartList.total.toFixed(2)}</h3>
+    //     </div>
+
+    //     </div>
+    //     <p>Thank you for your interest!</p>
+    //   </body>
+    // </html>
