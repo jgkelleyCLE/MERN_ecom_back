@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import authRoutes from './routes/authRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import emailRoutes from './routes/emailRoutes.js'
+import orderRoutes from './routes/orderRoutes.js'
 
 const app = express()
 
@@ -31,6 +32,7 @@ connectionObj.once('connected', ()=> {
 app.use('/api/auth', authRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/mail', emailRoutes)
+app.use('/api/orders', orderRoutes)
 
 app.listen(port, ()=> {
     console.log(`Server is running on port ${port}`)

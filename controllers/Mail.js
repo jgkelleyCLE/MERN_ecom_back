@@ -15,6 +15,7 @@ export const sendMail = async(req, res) => {
 
     console.log("CART LIST", cartList)
 
+
     let date = new Date(cartList.selected); // assuming cartList.selected is a date
 
     let day = String(date.getDate()).padStart(2, '0');
@@ -34,8 +35,8 @@ export const sendMail = async(req, res) => {
 
   let mailOptions = {
     from: 'Party Safari <partysafariohio@gmail.com>',
-    to: 'john.gerard.kelley@gmail.com',
-    subject: 'Party Safari Quote',
+    to: `${cartList.email}`,
+    subject: `Party Safari Quote - ${cartList.title}`,
     html: `
     <html>
       <head>
