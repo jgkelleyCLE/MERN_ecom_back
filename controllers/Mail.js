@@ -59,8 +59,8 @@ export const sendMail = async(req, res) => {
             background-color: #007cf0;
           }
           .product-image {
-            width: 150px;
-            height: 50px;
+            width: 100%;
+            height: auto;
             border-radius: 5px;
             object-fit: contain;
           }
