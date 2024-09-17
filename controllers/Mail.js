@@ -46,7 +46,7 @@ export const sendMail = async(req, res) => {
             border: 1px solid black;
           }
           .my-table th {
-            text-align: left;
+            text-align: center;
             background-color: #ff8c1a;
           }
           .my-table-2 {
@@ -55,12 +55,12 @@ export const sendMail = async(req, res) => {
             margin-top: 10px;
           }
           .my-table-2 th {
-            text-align: left;
+            text-align: center;
             background-color: #007cf0;
           }
           .product-image {
             width: 100%;
-            max-width: 300px;
+            max-width: 250px;
             height: auto;
             border-radius: 5px;
             object-fit: contain;
