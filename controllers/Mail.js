@@ -60,6 +60,7 @@ export const sendMail = async(req, res) => {
           }
           .product-image {
             width: 100%;
+            max-width: 300px;
             height: auto;
             border-radius: 5px;
             object-fit: contain;
