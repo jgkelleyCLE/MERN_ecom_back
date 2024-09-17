@@ -25,6 +25,10 @@ const Review = mongoose.model('Review', reviewSchema)
 export { Review }
 
 const ProductSchema = new mongoose.Schema({
+    // _id: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     required: true
+    // },
     product: {
         type: String,
         required: true

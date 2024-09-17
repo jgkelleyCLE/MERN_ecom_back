@@ -34,9 +34,9 @@ export const sendMail = async(req, res) => {
   });
 
   let mailOptions = {
-    from: 'Party Safari <partysafariohio@gmail.com>',
+    from: 'Tentlify Rentals <partysafariohio@gmail.com>',
     to: `${cartList.email}`,
-    subject: `Party Safari Quote - ${cartList.title}`,
+    subject: `Tentlify Rentals Quote - ${cartList.title}`,
     html: `
     <html>
       <head>
@@ -48,6 +48,15 @@ export const sendMail = async(req, res) => {
           .my-table th {
             text-align: left;
             background-color: #ff8c1a;
+          }
+          .my-table-2 {
+            width: 100%;
+            border: 1px solid black;
+            margin-top: 10px;
+          }
+          .my-table-2 th {
+            text-align: left;
+            background-color: #007cf0;
           }
           .product-image {
             width: 50px;
@@ -62,7 +71,7 @@ export const sendMail = async(req, res) => {
           .flex-container-end {
                 display: flex;
                 flex-direction: column;
-                align-items: end;
+                align-items: flex-end;
             }
             .flex-container-center {
                 display: flex;
@@ -71,12 +80,13 @@ export const sendMail = async(req, res) => {
             }
         </style>
       </head>
+     
       <body>
       <div class="flex-container-center">
-      <img style="width: 100px; height: 100px;" src="https://partysafariohio.com/wp-content/uploads/2018/06/Party-Safari-LogoColor.png" alt="partySafariLogo" />
+      <img style="width: 100px; height: 100px;" src="https://firebasestorage.googleapis.com/v0/b/collab-checklist.appspot.com/o/media%2FTenlify_Logo_Thin_Small.png?alt=media&token=977d961e-7d08-4031-b2d1-52cfa3d2cada" alt="partySafariLogo" />
       </div>
         <h1>Your Quote</h1>
-        <h3>Thank you for your interest in Party Safari! Below is your quote:</h3>
+        <h3>Thank you for your interest in Tentlify Rentals! Below is your quote:</h3>
         <h4>Event Date: ${formattedDate}</h4>
         <h4>Email: ${cartList.email}</h4>
         <table class="my-table">
@@ -92,8 +102,8 @@ export const sendMail = async(req, res) => {
             <td><img class="product-image" src="${item.image}" /></td>
               <td>${item.product}</td>
               <td>${item.cartQuantity}</td>
-              <td>$${item.price.toFixed(2)}</td>
-              <td>$${(item.price * item.cartQuantity).toFixed(2)}</td>
+              <td>$${item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              <td>$${(item.price * item.cartQuantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
             </tr>
            
           `).join('')}
@@ -103,15 +113,25 @@ export const sendMail = async(req, res) => {
             
           
         </table>
-            <div class="flex-container-end">
+
+        <table class="my-table-2">
+          <tr>
+            <th>Subtotal</th>
+            <th>Tax</th>
+            <th>Delivery Fee</th>
+            <th>Total</th>
+          </tr>
           
-          <p>Subtotal: ${cartList.subtotal.toFixed(2)}</p>
-          <p>Tax: ${cartList.taxPrice.toFixed(2)}</p>
-          <p>Delivery Fee: ${cartList.deliveryFee.toFixed(2)}</p>
-          <h3 style="font: bold">Total: ${cartList.total.toFixed(2)}</h3>
-            </div>
-        
-        
+            <tr>
+              <td>${cartList.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              <td>${cartList.taxPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              <td>${cartList.deliveryFee.toFixed(2)}</td>
+              <td><b>${cartList.total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</b></td>
+            </tr>
+           
+          
+        </table>
+      
       </body>
     </html>
   `,

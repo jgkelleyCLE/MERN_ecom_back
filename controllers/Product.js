@@ -42,3 +42,26 @@ export const getProductsByCategory = async(req, res) => {
         res.status(400).json({ message: error.message });
     }
 }
+
+
+//SEARCH PRODUCTS
+export const searchProducts = async(req, res) => {
+
+    const query = req.query.q
+
+    try {
+        
+        const products = await Product.find({ 
+            $or: [
+                {product: { $regex: query, $options: "i" }},
+                {category: { $regex: query, $options: "i" }},
+                {tags: { $regex: query, $options: "i" }}
+            ]
+            }).limit(40)
+        res.status(200).json(products)
+
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+
+}

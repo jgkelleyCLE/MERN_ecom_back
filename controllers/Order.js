@@ -11,12 +11,13 @@ export const createOrder = async(req, res) => {
             res.status(400).json({ message: 'No order items' })
         } else {
             const newOrder = await Order.create({
-                orderItems: orderItems.map(item => ({
-                    ...item,
-                    product: item._id,
-                    _id: undefined
-                })),
-                user: req.user._id,
+                // orderItems: orderItems.map(item => ({
+                //     ...item,
+                //     product: item._id,
+                //     _id: undefined
+                // })),
+                orderItems,
+                userId: req.user._id,
                 shippingAddress,
                 paymentMethod,
                 itemsPrice,
