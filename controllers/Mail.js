@@ -68,7 +68,7 @@ export const sendMail = async(req, res) => {
           .flex-col-container-start {
                 display: flex;
                 flex-direction: column;
-                align-items: start;
+                align-items: center;
           }
           .flex-container-end {
                 display: flex;
