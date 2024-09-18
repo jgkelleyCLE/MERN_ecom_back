@@ -48,7 +48,7 @@ export const sendMail = async(req, res) => {
           }
           .my-table th {
             text-align: center;
-            background-color: #676767;
+            background-color: #acacac;
           }
           .my-table tr {
             text-align: center;
@@ -61,7 +61,7 @@ export const sendMail = async(req, res) => {
           }
           .my-table-2 th {
             text-align: center;
-            background-color: #676767;
+            background-color: #acacac;
           }
           .my-table-2 tr {
             text-align: center;
@@ -110,12 +110,12 @@ export const sendMail = async(req, res) => {
             <th>Item Price</th>
           </tr>
           ${cartList.cart.map(item => `
-            <tr class="flex-container-center">
-            <td class="flex-container-center" ><img class="product-image" src="${item.image}" /></td>
-              <td class="flex-container-center" >${item.product}</td>
-              <td class="flex-container-center" >${item.cartQuantity}</td>
-              <td class="flex-container-center">$${item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-              <td class="flex-container-center" >$${(item.price * item.cartQuantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+            <tr>
+            <td><img class="product-image" src="${item.image}" /></td>
+              <td >${item.product}</td>
+              <td>${item.cartQuantity}</td>
+              <td >$${item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              <td >$${(item.price * item.cartQuantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
             </tr>
            
           `).join('')}
@@ -135,7 +135,7 @@ export const sendMail = async(req, res) => {
           </tr>
           
             <tr class="bg-red-500">
-              <td class="flex-container-center" >${cartList.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              <td>${cartList.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               <td>${cartList.taxPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               <td>${cartList.deliveryFee.toFixed(2)}</td>
               <td><b>${cartList.total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</b></td>
