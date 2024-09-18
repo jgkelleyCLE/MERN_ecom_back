@@ -103,16 +103,18 @@ export const sendMail = async(req, res) => {
         <h4>Email: ${cartList.email}</h4>
         <table class="my-table">
           <tr>
-            <th>Image</th>
             <th>Item</th>
-            <th>Quantity</th>
+            <th>Qty</th>
             <th>Unit Price</th>
             <th>Item Price</th>
           </tr>
           ${cartList.cart.map(item => `
             <tr>
-            <td><img class="product-image" src="${item.image}" /></td>
-              <td >${item.product}</td>
+            <td>
+                <img class="product-image" src="${item.image}" />
+                <div>${item.product}</div>
+              </td>
+              
               <td>${item.cartQuantity}</td>
               <td >$${item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               <td >$${(item.price * item.cartQuantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
