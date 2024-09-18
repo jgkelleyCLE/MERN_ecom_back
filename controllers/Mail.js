@@ -134,7 +134,7 @@ export const sendMail = async(req, res) => {
             <th>Total</th>
           </tr>
           
-            <tr class="bg-red-500">
+            <tr>
               <td>${cartList.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               <td>${cartList.taxPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               <td>${cartList.deliveryFee.toFixed(2)}</td>
