@@ -40,6 +40,7 @@ export const sendMail = async(req, res) => {
     html: `
     <html>
       <head>
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         <style>
           .my-table {
             width: 100%;
@@ -92,7 +93,7 @@ export const sendMail = async(req, res) => {
         <h3>Thank you for your interest in Tentlify Rentals! Below is your quote:</h3>
         <h4>Event Date: ${formattedDate}</h4>
         <h4>Email: ${cartList.email}</h4>
-        <table class="my-table">
+        <table class="bg-green-400">
           <tr>
             <th>Image</th>
             <th>Item</th>
@@ -101,13 +102,14 @@ export const sendMail = async(req, res) => {
             <th>Item Price</th>
           </tr>
           ${cartList.cart.map(item => `
-            <tr>
-            <td><img class="product-image" src="${item.image}" /></td>
-              <td>${item.product}</td>
-              <td>${item.cartQuantity}</td>
-              <td>$${item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-              <td>$${(item.price * item.cartQuantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+            <tr class="flex-container-center">
+            <td class="flex-container-center" ><img class="rounded-2xl" src="${item.image}" /></td>
+              <td class="flex-container-center" >${item.product}</td>
+              <td class="flex-container-center" >${item.cartQuantity}</td>
+              <td class="flex-container-center">$${item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              <td class="flex-container-center" >$${(item.price * item.cartQuantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
             </tr>
+            
            
           `).join('')}
 
@@ -118,15 +120,15 @@ export const sendMail = async(req, res) => {
         </table>
 
         <table class="my-table-2">
-          <tr>
+          <tr >
             <th>Subtotal</th>
             <th>Tax</th>
             <th>Delivery Fee</th>
             <th>Total</th>
           </tr>
           
-            <tr>
-              <td>${cartList.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+            <tr class="bg-red-500">
+              <td class="flex-container-center" >${cartList.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               <td>${cartList.taxPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               <td>${cartList.deliveryFee.toFixed(2)}</td>
               <td><b>${cartList.total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</b></td>
