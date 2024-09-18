@@ -48,7 +48,11 @@ export const sendMail = async(req, res) => {
           }
           .my-table th {
             text-align: center;
-            background-color: #ff8c1a;
+            background-color: #676767;
+          }
+          .my-table tr {
+            text-align: center;
+            
           }
           .my-table-2 {
             width: 100%;
@@ -57,7 +61,11 @@ export const sendMail = async(req, res) => {
           }
           .my-table-2 th {
             text-align: center;
-            background-color: #007cf0;
+            background-color: #676767;
+          }
+          .my-table-2 tr {
+            text-align: center;
+            
           }
           .product-image {
             width: 100%;
