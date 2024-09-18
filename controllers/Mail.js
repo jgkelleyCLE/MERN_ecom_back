@@ -93,7 +93,7 @@ export const sendMail = async(req, res) => {
         <h3>Thank you for your interest in Tentlify Rentals! Below is your quote:</h3>
         <h4>Event Date: ${formattedDate}</h4>
         <h4>Email: ${cartList.email}</h4>
-        <table class="bg-green-400">
+        <table class="my-table">
           <tr>
             <th>Image</th>
             <th>Item</th>
@@ -103,13 +103,12 @@ export const sendMail = async(req, res) => {
           </tr>
           ${cartList.cart.map(item => `
             <tr class="flex-container-center">
-            <td class="flex-container-center" ><img class="rounded-2xl" src="${item.image}" /></td>
+            <td class="flex-container-center" ><img class="product-image" src="${item.image}" /></td>
               <td class="flex-container-center" >${item.product}</td>
               <td class="flex-container-center" >${item.cartQuantity}</td>
               <td class="flex-container-center">$${item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               <td class="flex-container-center" >$${(item.price * item.cartQuantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
             </tr>
-            
            
           `).join('')}
 
