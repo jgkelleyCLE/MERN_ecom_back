@@ -5,7 +5,8 @@ import Order from "../models/orderModel.js";
 export const createOrder = async(req, res) => {
 
     try {
-        const { orderItems, shippingAddress, paymentMethod, itemsPrice, taxPrice, shippingPrice, totalPrice } = req.body
+        // const { orderItems, shippingAddress, paymentMethod, itemsPrice, taxPrice, shippingPrice, totalPrice } = req.body
+        const { title, orderItems, eventDate, itemsPrice, taxPrice, shippingPrice, totalPrice } = req.body
 
         if (orderItems && orderItems.length === 0) {
             res.status(400).json({ message: 'No order items' })
@@ -16,10 +17,10 @@ export const createOrder = async(req, res) => {
                 //     product: item._id,
                 //     _id: undefined
                 // })),
+                // userId: req.user._id,
+                title,
                 orderItems,
-                userId: req.user._id,
-                shippingAddress,
-                paymentMethod,
+                eventDate,
                 itemsPrice,
                 taxPrice,
                 shippingPrice,

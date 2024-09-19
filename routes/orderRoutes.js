@@ -5,7 +5,7 @@ import { auth } from '../middleware/auth.js'
 const router = express.Router()
 
 //create order
-router.post('/', auth, createOrder)
+router.post('/', createOrder)
 
 //get all orders
 router.get('/', auth, getOrders)
