@@ -8,7 +8,7 @@ const router = express.Router()
 router.post('/', createOrder)
 
 //get all orders
-router.get('/', auth, getOrders)
+router.get('/', getOrders)
 
 //get user orders
 router.get('/user/:id', auth, getUserOrders)
