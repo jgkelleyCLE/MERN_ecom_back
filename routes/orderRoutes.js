@@ -14,7 +14,7 @@ router.get('/', getOrders)
 router.get('/user/:id', auth, getUserOrders)
 
 //get order by id
-router.get('/:id', auth, getOrderByID)
+router.get('/:id', getOrderByID)
 
 //update order to paid
 router.put('/:id/pay', auth, updateOrderToPaid)
