@@ -16,6 +16,32 @@ const OrderSchema = new mongoose.Schema({
             cartQuantity: { type: Number, required: false },
             image: { type: String, required: false},
             price: { type: Number, required: false },
+            parts: [
+                {
+                    _id: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        required: false,
+                        auto: true
+                    },
+                    item: {
+                        type: String,
+                        required: false
+                    },
+                    quantity: {
+                        type: Number,
+                        required: false
+                    },
+                    completed: {
+                        type: Boolean,
+                        required: false,
+                        default: false
+                    },
+                    completedBy: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'User'
+                    }
+                }
+            ],
             productId: {
                 type: mongoose.Schema.Types.ObjectId,
                 required: false,

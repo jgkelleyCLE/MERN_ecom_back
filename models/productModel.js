@@ -41,20 +41,20 @@ const ProductSchema = new mongoose.Schema({
         {
             _id: {
                 type: mongoose.Schema.Types.ObjectId,
-                required: true,
+                required: false,
                 auto: true
             },
             item: {
                 type: String,
-                required: true
+                required: false
             },
             quantity: {
                 type: Number,
-                required: true
+                required: false
             },
             completed: {
                 type: Boolean,
-                required: true,
+                required: false,
                 default: false
             },
             completedBy: {
