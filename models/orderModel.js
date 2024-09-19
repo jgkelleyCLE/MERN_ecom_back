@@ -38,7 +38,8 @@ const OrderSchema = new mongoose.Schema({
                     },
                     completedBy: {
                         type: mongoose.Schema.Types.ObjectId,
-                        ref: 'User'
+                        ref: 'User',
+                        default: null
                     }
                 }
             ],
