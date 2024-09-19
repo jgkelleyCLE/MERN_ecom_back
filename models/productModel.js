@@ -37,6 +37,32 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    parts: [
+        {
+            _id: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: true,
+                auto: true
+            },
+            item: {
+                type: String,
+                required: true
+            },
+            quantity: {
+                type: Number,
+                required: true
+            },
+            completed: {
+                type: Boolean,
+                required: true,
+                default: false
+            },
+            completedBy: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        }
+    ],
     category: {
         type: String,
         required: true

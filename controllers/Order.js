@@ -8,16 +8,13 @@ export const createOrder = async(req, res) => {
         // const { orderItems, shippingAddress, paymentMethod, itemsPrice, taxPrice, shippingPrice, totalPrice } = req.body
         const { title, orderItems, eventDate, itemsPrice, taxPrice, shippingPrice, totalPrice } = req.body
 
+        console.log("ORDER ITEMS:", orderItems)
+
         if (orderItems && orderItems.length === 0) {
             res.status(400).json({ message: 'No order items' })
         } else {
             const newOrder = await Order.create({
-                // orderItems: orderItems.map(item => ({
-                //     ...item,
-                //     product: item._id,
-                //     _id: undefined
-                // })),
-                // userId: req.user._id,
+                
                 title,
                 orderItems,
                 eventDate,
