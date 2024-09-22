@@ -36,7 +36,10 @@ export const getProductsByCategory = async(req, res) => {
     const category = req.params.category;
 
     try {
-        const products = await Product.find({ category: category });
+        const products = await Product.find({ 
+            category: category,
+            product: { $not: { $regex: /Festival|Pole Tent|50 x/i } }
+         });
         res.status(200).json(products);
     } catch (error) {
         res.status(400).json({ message: error.message });
