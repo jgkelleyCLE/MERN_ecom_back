@@ -104,6 +104,11 @@ const ProductSchema = new mongoose.Schema({
     tags: {
         type: String,
         required: false
+    },
+    status: {
+        type: String,
+        required: false,
+        default: 'Active'
     }
 }, { timestamps: true })
 

@@ -6,7 +6,7 @@ export const createOrder = async(req, res) => {
 
     try {
         // const { orderItems, shippingAddress, paymentMethod, itemsPrice, taxPrice, shippingPrice, totalPrice } = req.body
-        const { title, orderItems, eventDate, itemsPrice, taxPrice, shippingPrice, totalPrice } = req.body
+        const { title, orderItems, eventDate, itemsPrice, taxPrice, shippingPrice, totalPrice, orderStatus } = req.body
 
         console.log("ORDER ITEMS:", orderItems)
 
@@ -21,7 +21,8 @@ export const createOrder = async(req, res) => {
                 itemsPrice,
                 taxPrice,
                 shippingPrice,
-                totalPrice
+                totalPrice,
+                
             })
 
             res.status(201).json(newOrder)
@@ -91,4 +92,24 @@ export const updateOrderToPaid = async(req, res) => {
         } catch (error) {
             res.status(500).json({ message: error.message })
         }
+}
+
+export const updateOrderStatus = async(req, res) => {
+
+    const id = req.params.id
+    const { status } = req.body
+
+    console.log("STATUS:", status)
+
+    try {
+        
+        const order = await Order.findByIdAndUpdate(id, { 
+            status
+        }, { new: true })
+        res.status(200).json(order)
+
+    } catch (error) {
+        res.status(500).json({ message: error.message })    
+    }
+
 }

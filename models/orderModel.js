@@ -78,6 +78,11 @@ const OrderSchema = new mongoose.Schema({
         type: Boolean,
         required: false,
         default: false
+    },
+    status: {
+        type: String,
+        required: false,
+        default: 'Pending'
     }
 }, { timestamps: true })
 

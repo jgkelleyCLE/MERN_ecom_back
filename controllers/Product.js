@@ -31,6 +31,20 @@ export const getProduct = async(req, res) => {
 
 }
 
+//get all products -- exclude inactive products
+export const getAllExcludeInactive = async(req, res) => {
+
+    try {
+        
+        const products = await Product.find({ active: true, sale: true });
+        res.status(200).json(products);
+
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+
+}
+
 //GET PRODUCTS BY CATEGORY
 export const getProductsByCategory = async(req, res) => {
     const category = req.params.category;
@@ -44,6 +58,25 @@ export const getProductsByCategory = async(req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
+}
+
+//get products by category -- exclude inactive
+export const getActiveProductsByCategory = async(req, res) => {
+
+    const category = req.params.category;
+
+    try {
+        
+        const products = await Product.find({
+            category,
+            status: "Active"
+        })
+        res.status(200).json(products)
+
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+
 }
 
 
@@ -65,6 +98,25 @@ export const searchProducts = async(req, res) => {
 
     } catch (error) {
         res.status(404).json({ message: error.message })
+    }
+
+}
+
+//update product status
+export const updateProductStatus = async(req, res) => {
+
+    const id = req.params.id;
+    const { status } = req.body
+
+    try {
+        
+        const product = await Product.findByIdAndUpdate(id, {
+            status
+        }, { new: true })
+        res.status(200).json(product)
+
+    } catch (error) {
+        res.status(400).json({ message: error.message })
     }
 
 }

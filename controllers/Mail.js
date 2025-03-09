@@ -4,18 +4,6 @@ export const sendMail = async(req, res) => {
 
     const cartList = req.body.cartList;
 
-    console.log("SUBTOTAL", cartList.subtotal)
-    console.log("DELIVERY FEE", cartList.deliveryFee)
-    console.log("TAX PRICE", cartList.taxPrice)
-    console.log("TOTAL", cartList.total)
-
-    console.log("EMAIL", cartList.email)
-    console.log("DATE", cartList.selected)
-
-
-    console.log("CART LIST", cartList)
-
-
     let date = new Date(cartList.selected); // assuming cartList.selected is a date
 
     let day = String(date.getDate()).padStart(2, '0');
