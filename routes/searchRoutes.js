@@ -1,5 +1,5 @@
 import express from 'express'
-import { createSearch, getAllSearches } from '../controllers/Search.js'
+import { createSearch, getAllSearches, getSearchById } from '../controllers/Search.js'
 
 const router = express.Router()
 
@@ -8,5 +8,8 @@ router.get('/', getAllSearches)
 
 //create Search
 router.post('/', createSearch)
+
+//get search by id
+router.get('/:id', getSearchById)
 
 export default router

@@ -88,6 +88,7 @@ export const searchProducts = async(req, res) => {
     try {
         
         const products = await Product.find({ 
+            status: "Active",
             $or: [
                 {product: { $regex: query, $options: "i" }},
                 {category: { $regex: query, $options: "i" }},

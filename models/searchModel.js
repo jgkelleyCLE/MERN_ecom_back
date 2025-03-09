@@ -11,6 +11,7 @@ const SearchSchema = new mongoose.Schema({
     },
     resultIds: {
         type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Product',
         default: []
     }
 }, { timestamps: true })

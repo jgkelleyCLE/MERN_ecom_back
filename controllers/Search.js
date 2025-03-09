@@ -29,3 +29,19 @@ export const createSearch = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+//get search by id
+export const getSearchById = async(req, res) => {
+
+    const id = req.params.id;
+
+    try {
+        
+            const search = await Search.findById(id).populate('resultIds', '-parts')
+            res.status(200).json(search)
+
+    } catch (error) {
+        res.status(404).json({ message: error.message })       
+    }
+
+}
