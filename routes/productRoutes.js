@@ -1,5 +1,5 @@
 import express from 'express'
-import { getProducts, getProduct, getProductsByCategory, searchProducts, getAllExcludeInactive, updateProductStatus, getActiveProductsByCategory } from '../controllers/Product.js'
+import { getProducts, getProduct, getProductsByCategory, searchProducts, getAllExcludeInactive, updateProductStatus, getActiveProductsByCategory, editProduct } from '../controllers/Product.js'
 
 const router = express.Router()
 
@@ -26,6 +26,7 @@ router.get('/category/:category', getProductsByCategory)
 //update product status
 router.put('/:id/status', updateProductStatus)
 
-
+//edit product tags
+router.put('/tags/:id', editProduct)
 
 export default router
