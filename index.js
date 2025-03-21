@@ -10,11 +10,7 @@ import searchRoutes from './routes/searchRoutes.js'
 
 const app = express()
 
-app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:3000'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}))
+app.use(cors())
 app.use(express.json())
 dotenv.config()
 
